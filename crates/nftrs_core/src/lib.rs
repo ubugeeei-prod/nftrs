@@ -139,17 +139,26 @@ impl Job {
 pub fn node_file_trace(files: &[PathBuf], opts: &TraceOptions) -> TraceResult {
     let mut job = Job::new(opts);
     for file in files {
-        let abs = normalize_abs(file);
+        let abs = absolutize(file);
         job.emit_dependency(&abs, job.depth);
     }
     job.finish()
 }
 
-/// Normalize a path lexically and ensure it is absolute-ish (kept as-is if it
-/// already is). Mirrors `path.resolve` for our inputs, which are always
-/// absolute coming from the napi layer.
+/// Make `path` absolute (resolving against the current working directory when
+/// relative) and normalize it lexically. Mirrors `path.resolve(file)`.
+fn absolutize(path: &Path) -> PathBuf {
+    let abs = if path.is_absolute() {
+        path.to_path_buf()
+    } else {
+        std::env::current_dir().unwrap_or_default().join(path)
+    };
+    nftrs_fs::normalize(&abs)
+}
+
+/// Normalize a base path lexically, absolutizing if needed.
 fn normalize_abs(path: &Path) -> PathBuf {
-    nftrs_fs::normalize(path)
+    absolutize(path)
 }
 
 /// Compute `path` relative to `base`, using forward slashes. Falls back to
