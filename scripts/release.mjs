@@ -90,10 +90,13 @@ pkg.version = next;
 fs.writeFileSync(PKG_PATH, `${JSON.stringify(pkg, null, 2)}\n`);
 
 let cargo = fs.readFileSync(CARGO_PATH, 'utf8');
-// Bump the first `version = "..."` — the [workspace.package] one. Member crates
-// use `version.workspace = true`, so this is the only quoted version literal.
 const before = cargo;
-cargo = cargo.replace(/^version = "[^"]*"/m, `version = "${next}"`);
+// Bump the [workspace.package] version (the standalone `version = "..."` line).
+cargo = cargo.replace(/^version = "[^"]*"$/m, `version = "${next}"`);
+// Bump the [workspace.dependencies] pins for the internal crates — they carry
+// an explicit `version = "..."` that must track the package version, or cargo
+// fails to resolve (`nftrs_analyzer = "^0.0.0"` vs the bumped 0.1.0).
+cargo = cargo.replace(/^(nftrs_\w+ = \{ version = )"[^"]*"/gm, `$1"${next}"`);
 if (cargo === before) {
   die('Could not find [workspace.package] version in Cargo.toml');
 }
