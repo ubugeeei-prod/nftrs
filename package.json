@@ -16,14 +16,14 @@
   ],
   "scripts": {
     "build": "tsc",
-    "git-pre-commit": "prettier --write . && git add -A",
+    "git-pre-commit": "vp fmt . && git add -A",
     "prepublishOnly": "tsc && rm out/utils/*.d.ts && rm out/tsconfig.tsbuildinfo",
-    "prettier-check": "prettier --check .",
-    "prettier-fix": "prettier --write .",
+    "prettier-check": "vp fmt --check .",
+    "prettier-fix": "vp fmt .",
     "test": "jest --verbose",
-    "test-verbose": "tsc --sourceMap && jest --verbose --coverage --globals \"{\\\"coverage\\\":true}\""
+    "test-verbose": "tsc --sourceMap && jest --verbose --coverage --globals \"{\\\"coverage\\\":true}\"",
+    "prepare": "vp config"
   },
-  "prettier": "@vercel/style-guide/prettier",
   "dependencies": {
     "@mapbox/node-pre-gyp": "^2.0.0",
     "@rollup/pluginutils": "^5.1.3",
@@ -113,7 +113,6 @@
     "pixelmatch": "^5.2.1",
     "playwright-core": "^1.17.1",
     "polyfill-library": "3.93.0",
-    "prettier": "^3.2.5",
     "prismjs": "^1.30.0",
     "pug": "^3.0.3",
     "react": "^16.14.0",
@@ -140,7 +139,8 @@
     "vm2": "^3.10.4",
     "vue": "^3.5.13",
     "when": "^3.7.8",
-    "zeromq": "^6.0.0-beta.19"
+    "zeromq": "^6.0.0-beta.19",
+    "vite-plus": "catalog:"
   },
   "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
   "engines": {
