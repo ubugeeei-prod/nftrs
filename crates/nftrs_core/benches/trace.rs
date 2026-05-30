@@ -21,10 +21,7 @@ const FIXTURES: &[(&str, &[&str])] = &[
     ("webpack-wrapper", &["input.js"]),
     ("asset-fs-extra", &["input.js"]),
     ("asset-fs-inlining", &["input.js"]),
-    (
-        "multi-input",
-        &["input.js", "input-2.js", "input-3.js", "input-4.js"],
-    ),
+    ("multi-input", &["input.js", "input-2.js", "input-3.js", "input-4.js"]),
     ("browserify", &["input.js"]),
     ("asset-graceful-fs", &["input.js"]),
     ("asset-package-json", &["input.js"]),
@@ -35,11 +32,7 @@ const FIXTURES: &[(&str, &[&str])] = &[
 fn repo_root() -> PathBuf {
     // `CARGO_MANIFEST_DIR` is `<root>/crates/nftrs_core`.
     let manifest = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    manifest
-        .ancestors()
-        .nth(2)
-        .expect("workspace root")
-        .to_path_buf()
+    manifest.ancestors().nth(2).expect("workspace root").to_path_buf()
 }
 
 /// Build `TraceOptions` matching the compat harness wiring.
@@ -58,11 +51,11 @@ fn opts(root: &PathBuf, unit_dir: &PathBuf, name: &str) -> TraceOptions {
         paths: vec![
             (
                 "dep".to_string(),
-                format!("{}/esm-paths/esm-dep.js", unit_dir.display()),
+                unit_dir.join("esm-paths/esm-dep.js").to_string_lossy().into_owned(),
             ),
             (
                 "dep/".to_string(),
-                format!("{}/esm-paths-trailer/", unit_dir.display()),
+                unit_dir.join("esm-paths-trailer/").to_string_lossy().into_owned(),
             ),
         ],
     }
@@ -75,24 +68,18 @@ fn bench_trace(c: &mut Criterion) {
     let mut group = c.benchmark_group("node_file_trace");
     for (name, entries) in FIXTURES {
         let fixture_dir = unit_dir.join(name);
-        assert!(
-            fixture_dir.is_dir(),
-            "fixture {name} missing at {}",
-            fixture_dir.display()
-        );
+        assert!(fixture_dir.is_dir(), "fixture {name} missing at {}", fixture_dir.display());
         let files: Vec<PathBuf> = entries.iter().map(|e| fixture_dir.join(e)).collect();
         let options = opts(&root, &unit_dir, name);
 
         // Sanity: ensure the trace produces output (a real workload).
         let result = node_file_trace(&files, &options);
-        assert!(
-            !result.file_list.is_empty(),
-            "fixture {name} produced no files"
-        );
+        assert!(!result.file_list.is_empty(), "fixture {name} produced no files");
 
         group.bench_with_input(BenchmarkId::from_parameter(name), name, |b, _| {
             b.iter(|| {
-                let r = node_file_trace(std::hint::black_box(&files), std::hint::black_box(&options));
+                let r =
+                    node_file_trace(std::hint::black_box(&files), std::hint::black_box(&options));
                 std::hint::black_box(r);
             });
         });

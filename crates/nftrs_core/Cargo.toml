@@ -21,6 +21,7 @@ nftrs_analyzer = { workspace = true }
 rustc-hash = { workspace = true }
 memchr = { workspace = true }
 globset = { workspace = true }
+compact_str = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
