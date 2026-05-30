@@ -21,3 +21,10 @@ nftrs_analyzer = { workspace = true }
 rustc-hash = { workspace = true }
 memchr = { workspace = true }
 globset = { workspace = true }
+
+[dev-dependencies]
+criterion = { workspace = true }
+
+[[bench]]
+name = "trace"
+harness = false
