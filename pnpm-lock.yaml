@@ -199,9 +199,6 @@ importers:
       isomorphic-unfetch:
         specifier: ^4.0.2
         version: 4.0.2
-      jest:
-        specifier: ^29.7.0
-        version: 29.7.0(@types/node@25.7.0)(ts-node@10.9.2(@types/node@25.7.0)(typescript@5.7.2))
       jimp:
         specifier: ^1.6.0
         version: 1.6.0
@@ -11233,7 +11230,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-plugin-utils@7.25.9': {}
+  '@babel/helper-plugin-utils@7.25.9':
+    optional: true
 
   '@babel/helper-string-parser@7.25.9': {}
 
@@ -11254,86 +11252,103 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-bigint@7.8.3(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-import-attributes@7.26.0(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-import-meta@7.10.4(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-jsx@7.25.9(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-logical-assignment-operators@7.10.4(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-nullish-coalescing-operator@7.8.3(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-optional-catch-binding@7.8.3(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-private-property-in-object@7.14.5(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-top-level-await@7.14.5(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-typescript@7.25.9(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/runtime@7.26.10':
     dependencies:
@@ -11362,7 +11377,8 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@bcoe/v8-coverage@0.2.3': {}
+  '@bcoe/v8-coverage@0.2.3':
+    optional: true
 
   '@bugsnag/browser@8.2.0':
     dependencies:
@@ -12240,8 +12256,10 @@ snapshots:
       get-package-type: 0.1.0
       js-yaml: 3.14.2
       resolve-from: 5.0.0
+    optional: true
 
-  '@istanbuljs/schema@0.1.3': {}
+  '@istanbuljs/schema@0.1.3':
+    optional: true
 
   '@jest/console@29.7.0':
     dependencies:
@@ -12251,6 +12269,7 @@ snapshots:
       jest-message-util: 29.7.0
       jest-util: 29.7.0
       slash: 3.0.0
+    optional: true
 
   '@jest/core@29.7.0(ts-node@10.9.2(@types/node@25.7.0)(typescript@5.7.2))':
     dependencies:
@@ -12286,6 +12305,7 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+    optional: true
 
   '@jest/environment@29.7.0':
     dependencies:
@@ -12293,10 +12313,12 @@ snapshots:
       '@jest/types': 29.6.3
       '@types/node': 25.7.0
       jest-mock: 29.7.0
+    optional: true
 
   '@jest/expect-utils@29.7.0':
     dependencies:
       jest-get-type: 29.6.3
+    optional: true
 
   '@jest/expect@29.7.0':
     dependencies:
@@ -12304,6 +12326,7 @@ snapshots:
       jest-snapshot: 29.7.0
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@jest/fake-timers@29.7.0':
     dependencies:
@@ -12313,6 +12336,7 @@ snapshots:
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
+    optional: true
 
   '@jest/globals@29.7.0':
     dependencies:
@@ -12322,6 +12346,7 @@ snapshots:
       jest-mock: 29.7.0
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@jest/reporters@29.7.0':
     dependencies:
@@ -12351,16 +12376,19 @@ snapshots:
       v8-to-istanbul: 9.3.0
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@jest/schemas@29.6.3':
     dependencies:
       '@sinclair/typebox': 0.27.8
+    optional: true
 
   '@jest/source-map@29.6.3':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       callsites: 3.1.0
       graceful-fs: 4.2.11
+    optional: true
 
   '@jest/test-result@29.7.0':
     dependencies:
@@ -12368,6 +12396,7 @@ snapshots:
       '@jest/types': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       collect-v8-coverage: 1.0.2
+    optional: true
 
   '@jest/test-sequencer@29.7.0':
     dependencies:
@@ -12375,6 +12404,7 @@ snapshots:
       graceful-fs: 4.2.11
       jest-haste-map: 29.7.0
       slash: 3.0.0
+    optional: true
 
   '@jest/transform@29.7.0':
     dependencies:
@@ -12395,6 +12425,7 @@ snapshots:
       write-file-atomic: 4.0.2
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@jest/types@29.6.3':
     dependencies:
@@ -12404,6 +12435,7 @@ snapshots:
       '@types/node': 25.7.0
       '@types/yargs': 17.0.33
       chalk: 4.1.2
+    optional: true
 
   '@jimp/core@1.6.0':
     dependencies:
@@ -13392,17 +13424,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sinclair/typebox@0.27.8': {}
+  '@sinclair/typebox@0.27.8':
+    optional: true
 
   '@sindresorhus/is@0.7.0': {}
 
   '@sinonjs/commons@3.0.1':
     dependencies:
       type-detect: 4.0.8
+    optional: true
 
   '@sinonjs/fake-timers@10.3.0':
     dependencies:
       '@sinonjs/commons': 3.0.1
+    optional: true
 
   '@smithy/abort-controller@4.0.2':
     dependencies:
@@ -13835,19 +13870,23 @@ snapshots:
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.6
+    optional: true
 
   '@types/babel__generator@7.6.8':
     dependencies:
       '@babel/types': 7.26.10
+    optional: true
 
   '@types/babel__template@7.4.4':
     dependencies:
       '@babel/parser': 7.26.10
       '@babel/types': 7.26.10
+    optional: true
 
   '@types/babel__traverse@7.20.6':
     dependencies:
       '@babel/types': 7.26.10
+    optional: true
 
   '@types/bindings@1.5.5':
     dependencies:
@@ -13921,15 +13960,18 @@ snapshots:
 
   '@types/http-errors@2.0.4': {}
 
-  '@types/istanbul-lib-coverage@2.0.6': {}
+  '@types/istanbul-lib-coverage@2.0.6':
+    optional: true
 
   '@types/istanbul-lib-report@3.0.3':
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
+    optional: true
 
   '@types/istanbul-reports@3.0.4':
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
+    optional: true
 
   '@types/json-schema@7.0.15': {}
 
@@ -14027,7 +14069,8 @@ snapshots:
     dependencies:
       rdf-js: 4.0.2
 
-  '@types/stack-utils@2.0.3': {}
+  '@types/stack-utils@2.0.3':
+    optional: true
 
   '@types/tedious@4.0.14':
     dependencies:
@@ -14047,11 +14090,13 @@ snapshots:
     dependencies:
       '@types/webidl-conversions': 7.0.3
 
-  '@types/yargs-parser@21.0.3': {}
+  '@types/yargs-parser@21.0.3':
+    optional: true
 
   '@types/yargs@17.0.33':
     dependencies:
       '@types/yargs-parser': 21.0.3
+    optional: true
 
   '@types/yauzl@2.10.3':
     dependencies:
@@ -14476,6 +14521,7 @@ snapshots:
   ansi-escapes@4.3.2:
     dependencies:
       type-fest: 0.21.3
+    optional: true
 
   ansi-green@0.1.1:
     dependencies:
@@ -14493,7 +14539,8 @@ snapshots:
     dependencies:
       color-convert: 2.0.1
 
-  ansi-styles@5.2.0: {}
+  ansi-styles@5.2.0:
+    optional: true
 
   ansi-styles@6.2.3: {}
 
@@ -14512,6 +14559,7 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
+    optional: true
 
   apollo-datasource@3.3.2:
     dependencies:
@@ -14864,6 +14912,7 @@ snapshots:
       slash: 3.0.0
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   babel-plugin-istanbul@6.1.1:
     dependencies:
@@ -14874,6 +14923,7 @@ snapshots:
       test-exclude: 6.0.0
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   babel-plugin-jest-hoist@29.6.3:
     dependencies:
@@ -14881,6 +14931,7 @@ snapshots:
       '@babel/types': 7.26.10
       '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.6
+    optional: true
 
   babel-preset-current-node-syntax@1.1.0(@babel/core@7.26.0):
     dependencies:
@@ -14900,12 +14951,14 @@ snapshots:
       '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.26.0)
       '@babel/plugin-syntax-private-property-in-object': 7.14.5(@babel/core@7.26.0)
       '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.26.0)
+    optional: true
 
   babel-preset-jest@29.6.3(@babel/core@7.26.0):
     dependencies:
       '@babel/core': 7.26.0
       babel-plugin-jest-hoist: 29.6.3
       babel-preset-current-node-syntax: 1.1.0(@babel/core@7.26.0)
+    optional: true
 
   babel-walk@3.0.0-canary-5:
     dependencies:
@@ -15218,6 +15271,7 @@ snapshots:
   bser@2.1.1:
     dependencies:
       node-int64: 0.4.0
+    optional: true
 
   bson@6.10.3: {}
 
@@ -15345,7 +15399,8 @@ snapshots:
 
   camelcase@5.3.1: {}
 
-  camelcase@6.3.0: {}
+  camelcase@6.3.0:
+    optional: true
 
   caniuse-lite@1.0.30001690: {}
 
@@ -15363,7 +15418,8 @@ snapshots:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
-  char-regex@1.0.2: {}
+  char-regex@1.0.2:
+    optional: true
 
   character-entities@2.0.2: {}
 
@@ -15506,7 +15562,8 @@ snapshots:
 
   code-block-writer@12.0.0: {}
 
-  collect-v8-coverage@1.0.2: {}
+  collect-v8-coverage@1.0.2:
+    optional: true
 
   collection-visit@1.0.0:
     dependencies:
@@ -15713,6 +15770,7 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+    optional: true
 
   create-require@1.1.1: {}
 
@@ -15845,13 +15903,15 @@ snapshots:
     dependencies:
       mimic-response: 1.0.1
 
-  dedent@1.5.3: {}
+  dedent@1.5.3:
+    optional: true
 
   deep-equal@1.0.1: {}
 
   deep-is@0.1.4: {}
 
-  deepmerge@4.3.1: {}
+  deepmerge@4.3.1:
+    optional: true
 
   define-data-property@1.1.4:
     dependencies:
@@ -15920,7 +15980,8 @@ snapshots:
 
   detect-libc@2.0.4: {}
 
-  detect-newline@3.1.0: {}
+  detect-newline@3.1.0:
+    optional: true
 
   detect-newline@4.0.1: {}
 
@@ -15940,7 +16001,8 @@ snapshots:
 
   dfa@1.2.0: {}
 
-  diff-sequences@29.6.3: {}
+  diff-sequences@29.6.3:
+    optional: true
 
   diff@4.0.2: {}
 
@@ -16037,7 +16099,8 @@ snapshots:
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
 
-  emittery@0.13.1: {}
+  emittery@0.13.1:
+    optional: true
 
   emoji-regex@8.0.0: {}
 
@@ -16626,10 +16689,12 @@ snapshots:
       onetime: 5.1.2
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
+    optional: true
 
   exif-parser@0.1.12: {}
 
-  exit@0.1.2: {}
+  exit@0.1.2:
+    optional: true
 
   expand-brackets@2.1.4:
     dependencies:
@@ -16654,6 +16719,7 @@ snapshots:
       jest-matcher-utils: 29.7.0
       jest-message-util: 29.7.0
       jest-util: 29.7.0
+    optional: true
 
   express@4.21.2:
     dependencies:
@@ -16792,6 +16858,7 @@ snapshots:
   fb-watchman@2.0.2:
     dependencies:
       bser: 2.1.1
+    optional: true
 
   fd-slicer@1.1.0:
     dependencies:
@@ -17194,7 +17261,8 @@ snapshots:
       hasown: 2.0.2
       math-intrinsics: 1.1.0
 
-  get-package-type@0.1.0: {}
+  get-package-type@0.1.0:
+    optional: true
 
   get-port@5.1.1: {}
 
@@ -17563,7 +17631,8 @@ snapshots:
 
   html-entities@2.6.0: {}
 
-  html-escaper@2.0.2: {}
+  html-escaper@2.0.2:
+    optional: true
 
   html5shiv@3.7.3: {}
 
@@ -17656,7 +17725,8 @@ snapshots:
 
   human-signals@1.1.1: {}
 
-  human-signals@2.1.0: {}
+  human-signals@2.1.0:
+    optional: true
 
   iconv-lite@0.4.24:
     dependencies:
@@ -17698,6 +17768,7 @@ snapshots:
     dependencies:
       pkg-dir: 4.2.0
       resolve-cwd: 3.0.0
+    optional: true
 
   imurmurhash@0.1.4: {}
 
@@ -17892,7 +17963,8 @@ snapshots:
 
   is-fullwidth-code-point@3.0.0: {}
 
-  is-generator-fn@2.1.0: {}
+  is-generator-fn@2.1.0:
+    optional: true
 
   is-generator-function@1.0.10:
     dependencies:
@@ -18049,7 +18121,8 @@ snapshots:
 
   isstream@0.1.2: {}
 
-  istanbul-lib-coverage@3.2.2: {}
+  istanbul-lib-coverage@3.2.2:
+    optional: true
 
   istanbul-lib-instrument@5.2.1:
     dependencies:
@@ -18060,6 +18133,7 @@ snapshots:
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   istanbul-lib-instrument@6.0.3:
     dependencies:
@@ -18070,12 +18144,14 @@ snapshots:
       semver: 7.7.4
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   istanbul-lib-report@3.0.1:
     dependencies:
       istanbul-lib-coverage: 3.2.2
       make-dir: 4.0.0
       supports-color: 7.2.0
+    optional: true
 
   istanbul-lib-source-maps@4.0.1:
     dependencies:
@@ -18084,11 +18160,13 @@ snapshots:
       source-map: 0.6.1
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   istanbul-reports@3.1.7:
     dependencies:
       html-escaper: 2.0.2
       istanbul-lib-report: 3.0.1
+    optional: true
 
   isurl@1.0.0:
     dependencies:
@@ -18136,6 +18214,7 @@ snapshots:
       execa: 5.1.1
       jest-util: 29.7.0
       p-limit: 3.1.0
+    optional: true
 
   jest-circus@29.7.0:
     dependencies:
@@ -18162,6 +18241,7 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
+    optional: true
 
   jest-cli@29.7.0(@types/node@25.7.0)(ts-node@10.9.2(@types/node@25.7.0)(typescript@5.7.2)):
     dependencies:
@@ -18181,6 +18261,7 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+    optional: true
 
   jest-config@29.7.0(@types/node@25.7.0)(ts-node@10.9.2(@types/node@25.7.0)(typescript@5.7.2)):
     dependencies:
@@ -18212,6 +18293,7 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
+    optional: true
 
   jest-diff@29.7.0:
     dependencies:
@@ -18219,10 +18301,12 @@ snapshots:
       diff-sequences: 29.6.3
       jest-get-type: 29.6.3
       pretty-format: 29.7.0
+    optional: true
 
   jest-docblock@29.7.0:
     dependencies:
       detect-newline: 3.1.0
+    optional: true
 
   jest-each@29.7.0:
     dependencies:
@@ -18231,6 +18315,7 @@ snapshots:
       jest-get-type: 29.6.3
       jest-util: 29.7.0
       pretty-format: 29.7.0
+    optional: true
 
   jest-environment-node@29.7.0:
     dependencies:
@@ -18240,8 +18325,10 @@ snapshots:
       '@types/node': 25.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
+    optional: true
 
-  jest-get-type@29.6.3: {}
+  jest-get-type@29.6.3:
+    optional: true
 
   jest-haste-map@29.7.0:
     dependencies:
@@ -18258,11 +18345,13 @@ snapshots:
       walker: 1.0.8
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   jest-leak-detector@29.7.0:
     dependencies:
       jest-get-type: 29.6.3
       pretty-format: 29.7.0
+    optional: true
 
   jest-matcher-utils@29.7.0:
     dependencies:
@@ -18270,6 +18359,7 @@ snapshots:
       jest-diff: 29.7.0
       jest-get-type: 29.6.3
       pretty-format: 29.7.0
+    optional: true
 
   jest-message-util@29.7.0:
     dependencies:
@@ -18282,18 +18372,22 @@ snapshots:
       pretty-format: 29.7.0
       slash: 3.0.0
       stack-utils: 2.0.6
+    optional: true
 
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
       '@types/node': 25.7.0
       jest-util: 29.7.0
+    optional: true
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
     optionalDependencies:
       jest-resolve: 29.7.0
+    optional: true
 
-  jest-regex-util@29.6.3: {}
+  jest-regex-util@29.6.3:
+    optional: true
 
   jest-resolve-dependencies@29.7.0:
     dependencies:
@@ -18301,6 +18395,7 @@ snapshots:
       jest-snapshot: 29.7.0
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   jest-resolve@29.7.0:
     dependencies:
@@ -18313,6 +18408,7 @@ snapshots:
       resolve: 1.22.8
       resolve.exports: 2.0.3
       slash: 3.0.0
+    optional: true
 
   jest-runner@29.7.0:
     dependencies:
@@ -18339,6 +18435,7 @@ snapshots:
       source-map-support: 0.5.13
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   jest-runtime@29.7.0:
     dependencies:
@@ -18366,6 +18463,7 @@ snapshots:
       strip-bom: 4.0.0
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   jest-snapshot@29.7.0:
     dependencies:
@@ -18391,6 +18489,7 @@ snapshots:
       semver: 7.7.4
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   jest-util@29.7.0:
     dependencies:
@@ -18400,6 +18499,7 @@ snapshots:
       ci-info: 3.9.0
       graceful-fs: 4.2.11
       picomatch: 2.3.1
+    optional: true
 
   jest-validate@29.7.0:
     dependencies:
@@ -18409,6 +18509,7 @@ snapshots:
       jest-get-type: 29.6.3
       leven: 3.1.0
       pretty-format: 29.7.0
+    optional: true
 
   jest-watcher@29.7.0:
     dependencies:
@@ -18420,6 +18521,7 @@ snapshots:
       emittery: 0.13.1
       jest-util: 29.7.0
       string-length: 4.0.2
+    optional: true
 
   jest-worker@29.7.0:
     dependencies:
@@ -18427,6 +18529,7 @@ snapshots:
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
+    optional: true
 
   jest@29.7.0(@types/node@25.7.0)(ts-node@10.9.2(@types/node@25.7.0)(typescript@5.7.2)):
     dependencies:
@@ -18439,6 +18542,7 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+    optional: true
 
   jimp@1.6.0:
     dependencies:
@@ -18494,6 +18598,7 @@ snapshots:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
+    optional: true
 
   js-yaml@4.1.1:
     dependencies:
@@ -18700,7 +18805,8 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  kleur@3.0.3: {}
+  kleur@3.0.3:
+    optional: true
 
   koa-compose@4.1.0: {}
 
@@ -18782,7 +18888,8 @@ snapshots:
 
   leven@2.1.0: {}
 
-  leven@3.1.0: {}
+  leven@3.1.0:
+    optional: true
 
   levn@0.4.1:
     dependencies:
@@ -19084,12 +19191,14 @@ snapshots:
   make-dir@4.0.0:
     dependencies:
       semver: 7.7.4
+    optional: true
 
   make-error@1.3.6: {}
 
   makeerror@1.0.12:
     dependencies:
       tmpl: 1.0.5
+    optional: true
 
   map-age-cleaner@0.1.3:
     dependencies:
@@ -19680,7 +19789,8 @@ snapshots:
 
   node-gyp-build@4.8.4: {}
 
-  node-int64@0.4.0: {}
+  node-int64@0.4.0:
+    optional: true
 
   node-releases@2.0.19: {}
 
@@ -20236,7 +20346,8 @@ snapshots:
 
   pinkie@2.0.4: {}
 
-  pirates@4.0.6: {}
+  pirates@4.0.6:
+    optional: true
 
   piscina@3.2.0:
     dependencies:
@@ -20257,6 +20368,7 @@ snapshots:
   pkg-dir@4.2.0:
     dependencies:
       find-up: 4.1.0
+    optional: true
 
   pkg-dir@5.0.0:
     dependencies:
@@ -20369,6 +20481,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       ansi-styles: 5.2.0
       react-is: 18.3.1
+    optional: true
 
   priorityqueuejs@2.0.0: {}
 
@@ -20398,6 +20511,7 @@ snapshots:
     dependencies:
       kleur: 3.0.3
       sisteransi: 1.0.5
+    optional: true
 
   prop-types@15.8.1:
     dependencies:
@@ -20567,7 +20681,8 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  pure-rand@6.1.0: {}
+  pure-rand@6.1.0:
+    optional: true
 
   qs@6.13.0:
     dependencies:
@@ -20640,7 +20755,8 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-is@18.3.1: {}
+  react-is@18.3.1:
+    optional: true
 
   react@16.14.0:
     dependencies:
@@ -20852,6 +20968,7 @@ snapshots:
   resolve-cwd@3.0.0:
     dependencies:
       resolve-from: 5.0.0
+    optional: true
 
   resolve-dir@0.1.1:
     dependencies:
@@ -20870,7 +20987,8 @@ snapshots:
 
   resolve-url@0.2.1: {}
 
-  resolve.exports@2.0.3: {}
+  resolve.exports@2.0.3:
+    optional: true
 
   resolve@1.19.0:
     dependencies:
@@ -21288,7 +21406,8 @@ snapshots:
       mrmime: 2.0.1
       totalist: 3.0.1
 
-  sisteransi@1.0.5: {}
+  sisteransi@1.0.5:
+    optional: true
 
   slash@3.0.0: {}
 
@@ -21420,6 +21539,7 @@ snapshots:
     dependencies:
       buffer-from: 1.1.2
       source-map: 0.6.1
+    optional: true
 
   source-map-url@0.4.1: {}
 
@@ -21523,6 +21643,7 @@ snapshots:
   stack-utils@2.0.6:
     dependencies:
       escape-string-regexp: 2.0.0
+    optional: true
 
   stackframe@1.3.4: {}
 
@@ -21602,6 +21723,7 @@ snapshots:
     dependencies:
       char-regex: 1.0.2
       strip-ansi: 6.0.1
+    optional: true
 
   string-to-stream@3.0.1:
     dependencies:
@@ -21683,7 +21805,8 @@ snapshots:
 
   strip-bom@3.0.0: {}
 
-  strip-bom@4.0.0: {}
+  strip-bom@4.0.0:
+    optional: true
 
   strip-eof@1.0.0: {}
 
@@ -21808,6 +21931,7 @@ snapshots:
   supports-color@8.1.1:
     dependencies:
       has-flag: 4.0.0
+    optional: true
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
@@ -21902,6 +22026,7 @@ snapshots:
       '@istanbuljs/schema': 0.1.3
       glob: 7.2.3
       minimatch: 3.1.2
+    optional: true
 
   text-decoder@1.2.7:
     dependencies:
@@ -21971,7 +22096,8 @@ snapshots:
     dependencies:
       tldts-core: 7.0.28
 
-  tmpl@1.0.5: {}
+  tmpl@1.0.5:
+    optional: true
 
   to-absolute-glob@2.0.2:
     dependencies:
@@ -22134,11 +22260,13 @@ snapshots:
 
   type-component@0.0.1: {}
 
-  type-detect@4.0.8: {}
+  type-detect@4.0.8:
+    optional: true
 
   type-fest@0.20.2: {}
 
-  type-fest@0.21.3: {}
+  type-fest@0.21.3:
+    optional: true
 
   type-fest@0.6.0: {}
 
@@ -22385,6 +22513,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.25
       '@types/istanbul-lib-coverage': 2.0.6
       convert-source-map: 2.0.0
+    optional: true
 
   validate-npm-package-license@3.0.4:
     dependencies:
@@ -22517,6 +22646,7 @@ snapshots:
   walker@1.0.8:
     dependencies:
       makeerror: 1.0.12
+    optional: true
 
   watchify@3.11.1:
     dependencies:
@@ -22697,6 +22827,7 @@ snapshots:
     dependencies:
       imurmurhash: 0.1.4
       signal-exit: 3.0.7
+    optional: true
 
   ws@3.3.3:
     dependencies:

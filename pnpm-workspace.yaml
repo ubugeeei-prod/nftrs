@@ -11,12 +11,12 @@ allowBuilds:
   es5-ext: false
   esbuild: false
   ffmpeg-static: true
-  leveldown: true
+  leveldown: false
   microtime: false
   msgpackr-extract: false
   nice-napi: false
   oracledb: false
-  phantomjs-prebuilt: true
+  phantomjs-prebuilt: false
   protobufjs: false
   sharp: false
   unix-dgram: false
