@@ -72,6 +72,7 @@ if (existingTags && !dryRun) {
 if (dryRun) {
   console.log('--dry-run: would perform');
   console.log(`  • set crates/nftrs_napi/package.json version -> ${next}`);
+  console.log(`  • set @nftrs/binding-* optionalDependencies -> ${next}`);
   console.log(`  • set [workspace.package] version in Cargo.toml -> ${next}`);
   console.log('  • cargo update --workspace   (sync Cargo.lock)');
   console.log(`  • git commit -m "release: ${tag}"`);
@@ -87,6 +88,11 @@ if (!yes) {
 
 // --- apply the bump ---------------------------------------------------------
 pkg.version = next;
+for (const name of Object.keys(pkg.optionalDependencies ?? {})) {
+  if (name.startsWith('@nftrs/binding-')) {
+    pkg.optionalDependencies[name] = next;
+  }
+}
 fs.writeFileSync(PKG_PATH, `${JSON.stringify(pkg, null, 2)}\n`);
 
 let cargo = fs.readFileSync(CARGO_PATH, 'utf8');
