@@ -102,7 +102,10 @@ jobs:
   publish:
     name: Publish to npm
     needs: build
-    runs-on: blacksmith-32vcpu-ubuntu-2404
+    # npm provenance currently rejects self-hosted runners, including
+    # Blacksmith. Keep the heavy build matrix on Blacksmith, but publish from a
+    # GitHub-hosted runner so `npm publish --provenance` can verify the bundle.
+    runs-on: ubuntu-24.04
     # The "npm-publish" environment can carry required reviewers / branch
     # protections on npm releases (see docs/PUBLISHING.md).
     environment: npm-publish
