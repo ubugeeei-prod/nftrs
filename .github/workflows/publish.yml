@@ -35,21 +35,21 @@ jobs:
   # 1. Build the native addon for every target in the napi-rs matrix and upload
   #    each `.node` binary as an artifact for the publish job to collect.
   build:
-    name: Build - ${{ matrix.settings.target }}
-    runs-on: ${{ matrix.settings.host }}
+    name: Build - ${{ matrix.target }}
+    runs-on: ${{ matrix.host }}
     strategy:
       fail-fast: false
       matrix:
-        settings:
-          - host: macos-latest
+        include:
+          - host: blacksmith-12vcpu-macos-latest
             target: x86_64-apple-darwin
-          - host: macos-latest
+          - host: blacksmith-12vcpu-macos-latest
             target: aarch64-apple-darwin
-          - host: ubuntu-24.04
+          - host: blacksmith-32vcpu-ubuntu-2404
             target: x86_64-unknown-linux-gnu
-          - host: ubuntu-24.04
+          - host: blacksmith-32vcpu-ubuntu-2404
             target: aarch64-unknown-linux-gnu
-          - host: windows-2025
+          - host: blacksmith-32vcpu-windows-2025
             target: x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -64,35 +64,35 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
         with:
-          targets: ${{ matrix.settings.target }}
+          targets: ${{ matrix.target }}
 
       - name: Cache cargo
         uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
         with:
-          key: ${{ matrix.settings.target }}
+          key: ${{ matrix.target }}
 
       # aarch64 Linux is cross-compiled; napi-rs uses zig under the hood.
       - name: Build (cross via zig)
-        if: matrix.settings.target == 'aarch64-unknown-linux-gnu'
+        if: matrix.target == 'aarch64-unknown-linux-gnu'
         working-directory: ${{ env.APP_DIR }}
         run: >-
           npx --yes -p @napi-rs/cli@3 napi build
           --release --platform
-          --target ${{ matrix.settings.target }}
+          --target ${{ matrix.target }}
           --use-napi-cross
 
       - name: Build (native)
-        if: matrix.settings.target != 'aarch64-unknown-linux-gnu'
+        if: matrix.target != 'aarch64-unknown-linux-gnu'
         working-directory: ${{ env.APP_DIR }}
         run: >-
           npx --yes -p @napi-rs/cli@3 napi build
           --release --platform
-          --target ${{ matrix.settings.target }}
+          --target ${{ matrix.target }}
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: bindings-${{ matrix.settings.target }}
+          name: bindings-${{ matrix.target }}
           path: ${{ env.APP_DIR }}/*.node
           if-no-files-found: error
           retention-days: 7
@@ -102,7 +102,7 @@ jobs:
   publish:
     name: Publish to npm
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: blacksmith-32vcpu-ubuntu-2404
     # The "npm-publish" environment can carry required reviewers / branch
     # protections on npm releases (see docs/PUBLISHING.md).
     environment: npm-publish
