@@ -55,43 +55,67 @@ GitHub Environment so you can attach required reviewers or restrict it to tags.
 ### 0. Prerequisites
 
 - npm CLI **>= 11.5.1** and Node **>= 22.14.0** are required for OIDC trusted
-  publishing. The workflow upgrades npm (`npm install -g npm@latest`) on the
-  runner; install the same locally for the initial publish.
+  publishing. The `npm trust` CLI requires npm **>= 11.16.0**. The workflow
+  upgrades npm (`npm install -g npm@latest`) on the runner; install the same
+  locally for the initial publish.
 - The npm account/org that owns `@nftrs` must be able to publish to the
   `@nftrs` scope.
 
-### 1. Bootstrap the first publish (token), then switch to OIDC
+### 1. Bootstrap the first publish locally, then switch to OIDC
 
 `npm trust github <pkg>` **404s for a package that does not exist yet**
 (`POST /-/package/@nftrs%2fcore/trust` → 404) — a trusted publisher can only be
-attached to an existing package. So the very first release is a one-time
-token-authed publish that **creates** the packages; trusted publishing (OIDC)
-takes over for every release after.
+attached to an existing package. So the very first release is a one-time local
+publish that **creates** the packages; trusted publishing (OIDC) takes over for
+every release after.
 
-**a. Create the npm org + a token.** Ensure the `@nftrs` org exists
-(<https://www.npmjs.com/org/create>). Create a **granular access token** with
-read-write publish rights to the `@nftrs` scope
-(<https://www.npmjs.com/settings/~/tokens>), then add it as a repo secret:
-
-```bash
-gh secret set NPM_TOKEN          # paste the token when prompted
-```
-
-The publish job picks up `NPM_TOKEN` automatically (`NODE_AUTH_TOKEN`); when the
-secret is absent it publishes via OIDC instead.
-
-**b. Cut the first release.** This builds every platform and publishes
-`@nftrs/core` + the five `@nftrs/binding-*` with the token, creating them:
-
-```bash
-vp run release minor -y          # tag v0.1.0 -> publish.yml
-```
-
-**c. Configure trusted publishing** (now the packages exist):
+**a. Create the npm org and log in.** Ensure the `@nftrs` org exists
+(<https://www.npmjs.com/org/create>) and your account can publish to the scope:
 
 ```bash
 npm login
+npm org ls nftrs
+```
+
+**b. Build every platform package.** The easiest way to get the five native
+artifacts is a dry-run dispatch of the publish workflow:
+
+```bash
+gh workflow run publish.yml --ref main -f dry-run=true
+run_id=$(gh run list --workflow Publish --limit 1 --json databaseId --jq '.[0].databaseId')
+gh run watch "$run_id"
+gh run download "$run_id" --pattern 'bindings-*' --dir /tmp/nftrs-publish-artifacts
+```
+
+**c. Publish the first version locally.** Local bootstrap publish cannot use
+OIDC provenance, so disable provenance for this one-time publish:
+
+```bash
+rm -rf crates/nftrs_napi/{artifacts,npm}
+mkdir -p crates/nftrs_napi/artifacts
+find /tmp/nftrs-publish-artifacts -name '*.node' \
+  -exec cp {} crates/nftrs_napi/artifacts/ \;
+
+cd crates/nftrs_napi
+npx --yes -p @napi-rs/cli@3 napi create-npm-dirs
+npx --yes -p @napi-rs/cli@3 napi artifacts --output-dir ./artifacts
+npx --yes -p @napi-rs/cli@3 napi pre-publish \
+  --skip-optional-publish --no-gh-release -t npm
+
+for dir in npm/*/; do
+  [ -f "${dir}package.json" ] && npm publish "$dir" \
+    --access public --provenance=false
+done
+npm publish --access public --provenance=false
+```
+
+**d. Configure trusted publishing** (now the packages exist):
+
+```bash
+cd ../..
 npm run setup-trusted-publishing   # runs `npm trust github` for all six packages
+# or, without changing your global npm:
+# npx --yes npm@11.16.0 trust github <package> --file publish.yml ...
 npm trust list @nftrs/core         # verify
 ```
 
@@ -99,14 +123,15 @@ npm trust list @nftrs/core         # verify
 
 ```bash
 npm trust github <package> --file publish.yml \
-  --repo ubugeeei-prod/nftrs --env npm-publish --yes
+  --repo ubugeeei-prod/nftrs --env npm-publish --allow-publish --yes
 ```
 
 The `--file` / `--repo` / `--env` must match the workflow exactly — they form
-the OIDC subject npm checks at publish time.
+the OIDC subject npm checks at publish time. If npm asks for 2FA, complete the
+browser prompt and use npm's short 2FA skip window for the remaining packages.
 
-**d. Remove the token.** `gh secret delete NPM_TOKEN`. Every subsequent
-`vp run release` now publishes via OIDC trusted publishing — no token.
+Every subsequent `vp run release` now publishes via OIDC trusted publishing —
+no token.
 
 ### 2. Create the GitHub Environment
 

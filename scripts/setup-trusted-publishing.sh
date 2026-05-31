@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One-time setup of npm OIDC trusted publishing for every package nftrs ships.
 #
-# Uses npm v11's `npm trust github` CLI (npm >= 11.5.1). Run it ONCE, after
+# Uses npm v11's `npm trust github` CLI (npm >= 11.16.0). Run it ONCE, after
 # `npm login`, from any machine. It authorizes this repo's publish.yml workflow
 # (running in the `npm-publish` environment) to publish each package via OIDC —
 # no NPM_TOKEN ever lives in the repo.
@@ -14,9 +14,9 @@
 # Notes:
 # - The npm `@nftrs` org/scope must exist and your account must own it.
 # - Each package must ALREADY EXIST on npm: `npm trust github` returns 404 for a
-#   package that has never been published. So publish the first version with a
-#   token first (`gh secret set NPM_TOKEN` + `vp run release minor -y`), THEN run
-#   this to switch to OIDC. See docs/PUBLISHING.md "Bootstrap the first publish".
+#   package that has never been published. So publish the first version locally,
+#   THEN run this to switch to OIDC. See docs/PUBLISHING.md "Bootstrap the first
+#   publish".
 set -euo pipefail
 
 REPO="ubugeeei-prod/nftrs"
@@ -32,6 +32,12 @@ PACKAGES=(
   "@nftrs/binding-win32-x64-msvc"
 )
 
+if ! npm trust github --help 2>/dev/null | grep -q -- "--allow-publish"; then
+  echo "npm trust github must support --allow-publish. Use npm >= 11.16.0." >&2
+  echo "Example: npx --yes npm@11.16.0 trust github <package> ..." >&2
+  exit 1
+fi
+
 echo "Configuring GitHub Actions trusted publishing for ${#PACKAGES[@]} packages"
 echo "  repo=${REPO} workflow=${WORKFLOW} environment=${ENVIRONMENT}"
 echo
@@ -42,6 +48,7 @@ for pkg in "${PACKAGES[@]}"; do
     --file "${WORKFLOW}" \
     --repo "${REPO}" \
     --env "${ENVIRONMENT}" \
+    --allow-publish \
     --yes
 done
 
