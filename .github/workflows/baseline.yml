@@ -34,7 +34,7 @@ env:
 jobs:
   track:
     name: Track compat baseline
-    runs-on: ubuntu-24.04
+    runs-on: blacksmith-32vcpu-ubuntu-2404
     permissions:
       # Needed to push the history.ndjson update back to main.
       contents: write

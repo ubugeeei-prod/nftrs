@@ -41,7 +41,7 @@ env:
 jobs:
   publish-crates:
     name: cargo publish (crates.io)
-    runs-on: ubuntu-24.04
+    runs-on: blacksmith-32vcpu-ubuntu-2404
     # The "crates-publish" environment can carry required reviewers and holds
     # the CARGO_REGISTRY_TOKEN secret (see docs/PUBLISHING.md). For trusted
     # publishing instead, swap the token for `rust-lang/crates-io-auth-action`
