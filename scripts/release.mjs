@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Release driver for the npm package `@nftrs/core` (+ the per-platform
 // `@nftrs/binding-*` packages). Bumps the version, syncs the Rust workspace
-// version + Cargo.lock, commits, tags `v<version>`, and pushes the tag — which
-// triggers `.github/workflows/publish.yml` to build every platform binary and
-// publish to npm via OIDC trusted publishing (no token).
+// version + Cargo.lock, refreshes the generated NAPI loader metadata, commits,
+// tags `v<version>`, and pushes the tag — which triggers
+// `.github/workflows/publish.yml` to build every platform binary and publish to
+// npm via OIDC trusted publishing (no token).
 //
 // Usage (via Vite+):
 //   vp run release <patch|minor|major> [-y|--yes] [--dry-run]
@@ -22,7 +23,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const PKG_PATH = path.join(ROOT, 'crates', 'nftrs_napi', 'package.json');
+const PKG_DIR = path.join(ROOT, 'crates', 'nftrs_napi');
+const PKG_PATH = path.join(PKG_DIR, 'package.json');
 const CARGO_PATH = path.join(ROOT, 'Cargo.toml');
 
 const args = process.argv.slice(2);
@@ -41,6 +43,7 @@ if (!level) {
 
 const git = (...a) => execFileSync('git', a, { cwd: ROOT, encoding: 'utf8' }).trim();
 const runInherit = (cmd, ...a) => execFileSync(cmd, a, { cwd: ROOT, stdio: 'inherit' });
+const runInheritIn = (cwd, cmd, ...a) => execFileSync(cmd, a, { cwd, stdio: 'inherit' });
 
 // --- compute the next version ----------------------------------------------
 const pkg = JSON.parse(fs.readFileSync(PKG_PATH, 'utf8'));
@@ -75,6 +78,7 @@ if (dryRun) {
   console.log(`  • set @nftrs/binding-* optionalDependencies -> ${next}`);
   console.log(`  • set [workspace.package] version in Cargo.toml -> ${next}`);
   console.log('  • cargo update --workspace   (sync Cargo.lock)');
+  console.log('  • npx --yes -p @napi-rs/cli@3 napi build --release --platform');
   console.log(`  • git commit -m "release: ${tag}"`);
   console.log(`  • git tag ${tag}`);
   console.log(`  • git push origin ${branch} && git push origin ${tag}`);
@@ -111,8 +115,20 @@ fs.writeFileSync(CARGO_PATH, cargo);
 // Sync Cargo.lock to the new workspace version.
 runInherit('cargo', 'update', '--workspace');
 
+// Refresh the generated JS loader so its native binding version checks match
+// the package version being released.
+runInheritIn(PKG_DIR, 'npx', '--yes', '-p', '@napi-rs/cli@3', 'napi', 'build', '--release', '--platform');
+
 // --- commit, tag, push ------------------------------------------------------
-runInherit('git', 'add', 'crates/nftrs_napi/package.json', 'Cargo.toml', 'Cargo.lock');
+runInherit(
+  'git',
+  'add',
+  'crates/nftrs_napi/package.json',
+  'crates/nftrs_napi/index.js',
+  'crates/nftrs_napi/index.d.ts',
+  'Cargo.toml',
+  'Cargo.lock',
+);
 runInherit('git', 'commit', '-m', `release: ${tag}`);
 runInherit('git', 'tag', tag);
 runInherit('git', 'push', 'origin', branch);
