@@ -1,6 +1,6 @@
 {
   "name": "@nftrs/core",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Node.js dependency tracing (a Rust + OXC rewrite of @vercel/nft). Drop-in nodeFileTrace.",
   "keywords": [
     "dependency",
@@ -51,10 +51,10 @@
     "nftrs": "cli.js"
   },
   "optionalDependencies": {
-    "@nftrs/binding-darwin-x64": "0.2.1",
-    "@nftrs/binding-darwin-arm64": "0.2.1",
-    "@nftrs/binding-linux-x64-gnu": "0.2.1",
-    "@nftrs/binding-linux-arm64-gnu": "0.2.1",
-    "@nftrs/binding-win32-x64-msvc": "0.2.1"
+    "@nftrs/binding-darwin-x64": "0.3.0",
+    "@nftrs/binding-darwin-arm64": "0.3.0",
+    "@nftrs/binding-linux-x64-gnu": "0.3.0",
+    "@nftrs/binding-linux-arm64-gnu": "0.3.0",
+    "@nftrs/binding-win32-x64-msvc": "0.3.0"
   }
 }
