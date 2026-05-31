@@ -15,7 +15,7 @@
   "author": "ubugeeei",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ubugeeei-prod/nftrs.git",
+    "url": "git+https://github.com/ubugeeei-prod/nftrs.git",
     "directory": "crates/nftrs_napi"
   },
   "files": [
@@ -49,5 +49,12 @@
   },
   "bin": {
     "nftrs": "cli.js"
+  },
+  "optionalDependencies": {
+    "@nftrs/binding-darwin-x64": "0.2.0",
+    "@nftrs/binding-darwin-arm64": "0.2.0",
+    "@nftrs/binding-linux-x64-gnu": "0.2.0",
+    "@nftrs/binding-linux-arm64-gnu": "0.2.0",
+    "@nftrs/binding-win32-x64-msvc": "0.2.0"
   }
 }
